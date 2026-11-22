@@ -1,47 +1,19 @@
 ---
 /**
- * About me — copy + duotone footer avatar.
- *
- * Mobile (Figma 55:3107):
- *  - Avatar (240×154) sits on the page bg ABOVE the surface-2 panel.
- *  - Image cropped to head/torso via overflow + object-cover/object-top.
- *  - Surface-2 panel below: px-4, pt-6, pb-3.
- *  - Body line-height 1.5.
- *
- * Desktop (Figma 55:3028):
- *  - Full-width surface-2 band; centered max-w-[1540px] container.
- *  - Inner padding px-[150px] py-8 (32px vertical).
- *  - Avatar wrapper 331×326 absolutely pinned to bottom-right with
- *    right:64px from the centered container's right edge.
- *  - Spacer reserves room in the flex flow so copy never slides
- *    underneath the avatar at narrower md widths.
- *  - Body line-height 20px (text-body), 20px gap between paragraphs.
- *
- * Image: /public/footer-avatar.png
+ * About me — copy only (avatar removed).
  */
 import SectionTitle from "./SectionTitle.astro";
 
 const paragraphs = [
-  "Product designer with 10+ years of experience designing consumer products at scale, specializing in optimizing high-traffic customer journeys.",
-  "I'm increasingly using AI across research, synthesis, ideation, and storytelling to move from ideas to execution faster.",
-  "Self-taught, and still learning the same way I started: by building, testing, and shipping.",
-  "Outside work, I enjoy running, travel, and great food.",
+  "I'm a UX Design student, currently building my practice across digital products and interfaces.",
+  "My projects have taken me across mobile experiences, dashboards, and accessibility led product redesigns, from research and audits to interaction design and prototyping.",
+  "I enjoy getting hands on with little DIY projects, taking the longer route on walks, and trying places I've never eaten at before.",
 ];
 ---
 
 <section id="about" class="mt-10 md:mt-16">
   <!-- Mobile -->
   <div class="flex flex-col items-center md:hidden">
-    <div class="relative h-[154px] w-[240px] overflow-hidden">
-      <img
-        src="/footer-avatar.png"
-        alt="Stylized blue duotone portrait of Damodar facing the camera with arms crossed"
-        loading="lazy"
-        decoding="async"
-        class="absolute inset-0 h-full w-full object-cover object-top"
-      />
-    </div>
-
     <div class="flex w-full flex-col gap-6 bg-surface-2 px-4 pt-6 pb-3">
       <SectionTitle>About me</SectionTitle>
       <div class="flex flex-col gap-4 text-body leading-[1.5] text-ink-2">
@@ -60,23 +32,6 @@ const paragraphs = [
         <div class="flex flex-col gap-5 text-body text-ink-2">
           {paragraphs.map((p) => <p>{p}</p>)}
         </div>
-      </div>
-
-      <!-- Spacer so copy never slides under the avatar -->
-      <div class="h-[326px] w-[395px] shrink-0" aria-hidden="true"></div>
-
-      <!-- Avatar — pinned to bottom-right of the centered container -->
-      <div
-        class="pointer-events-none absolute bottom-0 right-[64px] h-[326px] w-[331px] overflow-hidden"
-      >
-        <img
-          src="/footer-avatar.png"
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          class="absolute inset-0 h-full w-full object-cover object-top"
-        />
       </div>
     </div>
   </div>
