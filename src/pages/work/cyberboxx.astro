@@ -1,0 +1,701 @@
+---
+/**
+ * Case study — Cyberboxx.
+ * Content from Case-study-Cyberboxx-desktop-01.pdf through
+ * Case-study-Cyberboxx-desktop-04.pdf mapped onto the existing layout,
+ * spacing, color, and typography conventions with .png asset names.
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Nav from "../../components/Nav.astro";
+import FadeIn from "../../components/FadeIn.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import TextBlock from "../../components/TextBlock.astro";
+import MetaData from "../../components/MetaData.astro";
+import NumberedItem from "../../components/NumberedItem.astro";
+
+// — Page meta —
+const summary = [
+  { label: "ROLE", value: "Lead designer" },
+  { label: "TIMELINE", value: "Apr 26 – Jun 26" },
+  { label: "PLATFORM", value: "Web, Android" },
+];
+
+// — Fraud stat highlights (labels removed) —
+const fraudStats = [
+  {
+    value: "22,495 Cr",
+    note: "Lost to online fraud across India in 2025.",
+  },
+  {
+    value: "28.15 Lakh",
+    note: "Cybercrime cases reported in 2025.",
+  },
+];
+
+// — Problem breakdown (01 / 02 from PDF) —
+const problemPoints = [
+  {
+    title: "Lack of awareness",
+    body: "Scammers use clever tactics and exploit emotions like fear, greed, and lust to trick people, making it difficult to tell what's real and what's a scam.",
+  },
+  {
+    title: "Lack of guidance",
+    body: "Once scammed, victims often don't know what steps to take, how to respond, or where to seek help.",
+  },
+];
+
+// — 4 User persona cards —
+const userPersonas = [
+  {
+    name: "Rajesh Sharma, 62",
+    role: "Sr. Citizen",
+    img: "/case-studies/cyberboxx/persona-rajesh-sharma.png",
+    goal: "Use digital services safely and independently.",
+    challenge: "Trusts authority figures and struggles with fraud identification.",
+    opportunity: "Step-by-step guidance, reassurance, human support.",
+  },
+  {
+    name: "Arjun Mehta, 29",
+    role: "Urban worker",
+    img: "/case-studies/cyberboxx/persona-arjun-mehta.png",
+    goal: "Stay protected without investing significant effort.",
+    challenge: "Aware of cyber risks but lacks visibility and actionable guidance.",
+    opportunity: "Risk monitoring, quick actions, personalized recommendations.",
+  },
+  {
+    name: "Sunita Devi, 36",
+    role: "Migrant worker",
+    img: "/case-studies/cyberboxx/persona-sunita-devi.png",
+    goal: "Protect her family's finances.",
+    challenge: "Cannot distinguish scams from genuine opportunities.",
+    opportunity: "Simple language, regional content, clear warnings.",
+  },
+  {
+    name: "Sandeep Verma, 36",
+    role: "Banker in a tier-3 city",
+    img: "/case-studies/cyberboxx/persona-sandeep-verma.png",
+    goal: "Avoid costly mistakes online",
+    challenge: "Cannot confidently judge whether something is risky",
+    opportunity: "Trust indicators, simplified security advice, contextual education.",
+  },
+];
+
+// — Existing product audit screens & learnings —
+const auditScreens = [
+  {
+    img: "/case-studies/cyberboxx/audit-dashboard.png",
+    alt: "Cyberboxx existing Dashboard screen",
+    caption: "Dashboard",
+  },
+  {
+    img: "/case-studies/cyberboxx/audit-identity-monitoring.png",
+    alt: "Cyberboxx existing Identity monitoring screen",
+    caption: "Identity monitoring",
+  },
+  {
+    img: "/case-studies/cyberboxx/audit-breach-report.png",
+    alt: "Cyberboxx existing Breach Report screen",
+    caption: "Breach Report",
+  },
+];
+
+const auditLearnings = [
+  "The homepage lacked a clear starting point",
+  "Too many options",
+  "Confusing terms, text heavy articles",
+  'Low value features like "Word of the Day"',
+];
+
+// — Siren competitive screens & learnings —
+const sirenScreens = [
+  {
+    img: "/case-studies/cyberboxx/siren-dashboard.png",
+    alt: "Siren Solo Dashboard screen showing safety score",
+    caption: "Dashboard",
+  },
+  {
+    img: "/case-studies/cyberboxx/siren-security-tools.png",
+    alt: "Siren Solo Security Tools screen",
+    caption: "Security Tools",
+  },
+  {
+    img: "/case-studies/cyberboxx/siren-protection-features.png",
+    alt: "Siren Solo Protection Features screen",
+    caption: "Protection Features",
+  },
+];
+
+const sirenLearnings = [
+  "Wider range of security features and tools",
+  "Clear safety score and risk level with actionable next steps",
+  "Dedicated sections for security tools and learning resources",
+];
+
+// — FTUE comparison —
+const ftueScreens = [
+  {
+    img: "/case-studies/cyberboxx/ftue-current.png",
+    alt: "Current FTUE screen",
+    caption: "Current",
+  },
+  {
+    img: "/case-studies/cyberboxx/ftue-proposed.png",
+    alt: "Proposed FTUE screen",
+    caption: "Proposed",
+  },
+];
+
+const ftueImprovements = [
+  "Leads with a personalized greeting and a single clear action, followed by prevention and learning.",
+];
+
+// — User with score comparison —
+const scoreScreens = [
+  {
+    img: "/case-studies/cyberboxx/score-current.png",
+    alt: "Current user with score screen",
+    caption: "Current",
+  },
+  {
+    img: "/case-studies/cyberboxx/score-proposed.png",
+    alt: "Proposed user with score screen",
+    caption: "Proposed",
+  },
+];
+
+const scoreImprovements = [
+  "Grouped educational content into dedicated Learn section for easier discovery.",
+  "Critical actions are surfaced first, so users know exactly what to do next.",
+];
+
+// — Learn experience individual screens —
+const learnScreens = [
+  {
+    img: "/case-studies/cyberboxx/learn-otp-scam.png",
+    alt: "OTP scam screen",
+    caption: "OTP scam",
+  },  
+  {
+    img: "/case-studies/cyberboxx/learn-fake-arrest.png",
+    alt: "Fake arrest scam screen",
+    caption: "Audio Quiz",
+  },
+  {
+    img: "/case-studies/cyberboxx/learn-fake-arrest-2.png",
+    alt: "Fake arrest scam screen variant 2",
+    caption: "Mock fake arrest",
+  },
+  {
+    img: "/case-studies/cyberboxx/learn-fake-arrest-interactive.png",
+    alt: "Fake arrest scam interactive screen",
+    caption: "Mock fake arrest interaction",
+  },
+  {
+    img: "/case-studies/cyberboxx/learn-story.png",
+    alt: "Learn story screen",
+    caption: "Comic-styled-stories",
+  },
+  {
+    img: "/case-studies/cyberboxx/learn-red-flag.png",
+    alt: "Spot the Red Flag(s) screen",
+    caption: "MCQ",
+  },
+  {
+    img: "/case-studies/cyberboxx/learn-vernac.png",
+    alt: "Vernacular scam learning screen",
+    caption: "Vernacular",
+  },
+  {
+    img: "/case-studies/cyberboxx/learn-poll.png",
+    alt: "Learn poll screen",
+    caption: "Poll",
+  },
+];
+
+const learnScenarios = [
+  "Fake arrest scam",
+  "OTP scam: 62000 gone from her account because she shared OTP to a fake bank executive on a call.",
+  "Net banking deactivation scam",
+  "21 din mein pesa double",
+];
+
+// — Explorations individual screens —
+const explorationScreens = [
+  {
+    img: "/case-studies/cyberboxx/exploration-01.png",
+    alt: "Exploration 01 screen",
+    caption: "Exploration 01",
+  },
+  {
+    img: "/case-studies/cyberboxx/exploration-02.png",
+    alt: "Exploration 02 screen",
+    caption: "Exploration 02",
+  },
+  {
+    img: "/case-studies/cyberboxx/exploration-03.png",
+    alt: "Exploration 03 screen",
+    caption: "Exploration 03",
+  },
+  {
+    img: "/case-studies/cyberboxx/exploration-04.png",
+    alt: "Exploration 04 screen",
+    caption: "Exploration 04",
+  },
+  {
+    img: "/case-studies/cyberboxx/exploration-05.png",
+    alt: "Exploration 05 screen",
+    caption: "Exploration 05",
+  },
+  {
+    img: "/case-studies/cyberboxx/exploration-06.png",
+    alt: "Exploration 06 screen",
+    caption: "Exploration 06",
+  },
+  {
+    img: "/case-studies/cyberboxx/exploration-07.png",
+    alt: "Exploration 07 screen",
+    caption: "Exploration 07",
+  },
+  {
+    img: "/case-studies/cyberboxx/exploration-08.png",
+    alt: "Exploration 08 screen",
+    caption: "Exploration 08",
+  },
+];
+
+const learnExplorations = [
+  "Image Story",
+  "Interaction Video",
+  "Audio Quiz",
+  "Poll",
+  "Spot the Red Flag(s)",
+  "MCQ",
+];
+---
+
+<BaseLayout
+  title="Cyberboxx: Designing Online Safety for Indian Users — Damodar Badhwar"
+  description="Adapting and redesigning Cyberboxx for Indian users across Web and Android."
+>
+  <!-- Top container: 24px above nav, then nav, then 56px gap before title -->
+  <div class="mx-auto w-full max-w-[1400px] px-4 pt-6 md:px-[60px]">
+    <Nav />
+  </div>
+
+  <article>
+    <div class="mx-auto w-full max-w-[1280px]">
+
+    <!-- ─────────── Title ─────────── -->
+    <FadeIn>
+      <header class="px-4 pt-14 pb-14 md:px-[60px]">
+        <h1
+          class="block w-full font-serif font-medium text-ink-3 leading-[1.2] text-[32px] tracking-[-0.64px] md:text-[56px] md:tracking-[-1.12px]"
+        >
+          Cyberboxx: Designing Online Safety for Indian Users
+        </h1>
+      </header>
+    </FadeIn>
+
+    <!-- ─────────── Summary metadata ─────────── -->
+    <FadeIn delay={80}>
+      <section class="px-4 pb-14 md:px-[60px]">
+        <div class="flex flex-wrap gap-x-8 gap-y-5 md:gap-x-16">
+          {summary.map((item) => (
+            <MetaData label={item.label} value={item.value} />
+          ))}
+        </div>
+      </section>
+    </FadeIn>
+
+    <!-- ─────────── Hero image ─────────── -->
+    <FadeIn delay={120}>
+      <section class="px-4 pb-14 md:px-[60px]">
+        <div class="overflow-hidden rounded-2xl bg-grey-200 aspect-[1160/434]">
+          <img
+            src="/case-studies/cyberboxx/hero.png"
+            alt="Cyberboxx: Designing Online Safety for Indian Users"
+            class="h-full w-full object-cover"
+            loading="eager"
+          />
+        </div>
+      </section>
+    </FadeIn>
+
+    <!-- ─────────── Overview ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="flex flex-col gap-3 md:flex-row md:gap-8 md:items-start">
+          <div class="md:w-[280px] md:shrink-0">
+            <TextBlock variant="section-title">Overview</TextBlock>
+          </div>
+          <div class="md:flex-1">
+            <TextBlock variant="body-lg">
+              Cyberboxx is a cybersecurity platform built to protect digital identities. The product is already live in the Canadian market. This project focused on redesigning that existing product for Indian users.
+            </TextBlock>
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    <!-- ─────────── The Reality of Online Safety in India ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="flex flex-col gap-6 md:flex-row md:gap-8 md:items-start">
+          <div class="md:w-[280px] md:shrink-0">
+            <TextBlock variant="section-title">The Reality of Online Safety in India</TextBlock>
+          </div>
+          <div class="md:flex-1 flex flex-col gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+              {fraudStats.map((stat) => (
+                <div class="rounded-xl bg-surface-2 p-6 flex flex-col gap-2">
+                  <TextBlock variant="stat-value">{stat.value}</TextBlock>
+                  <TextBlock variant="body">{stat.note}</TextBlock>
+                </div>
+              ))}
+            </div>
+            <div class="rounded-2xl bg-[#F4F7FA] p-6 flex flex-col gap-4">
+              <TextBlock variant="body-lg">
+                The problem is two-fold:
+              </TextBlock>
+              {problemPoints.map((point, i) => (
+                <NumberedItem n={i + 1} title={point.title}>
+                  {point.body}
+                </NumberedItem>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    <!-- ─────────── Client's brief ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="flex flex-col gap-3 md:flex-row md:gap-8 md:items-start">
+          <div class="md:w-[280px] md:shrink-0">
+            <TextBlock variant="section-title">Client's brief</TextBlock>
+          </div>
+          <div class="md:flex-1">
+            <TextBlock variant="body">
+              Cyberboxx is an established cybersecurity product in Canadian market and was looking to expand its reach to India. The goal was to adapt and redesign the existing product to make it more suitable and accessible for Indian users, considering their different needs, backgrounds, and levels of digital literacy.
+            </TextBlock>
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    <!-- ─────────── Understanding the Users (Aligned 4-col desktop / 2-col mobile) ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-10 md:px-[60px]">
+        <TextBlock variant="section-title" as="h3">Understanding the Users</TextBlock>
+      </section>
+    </FadeIn>
+
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="rounded-2xl border border-divider bg-[#F4F7FA] overflow-hidden">
+          <div class="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-divider">
+            {userPersonas.map((persona) => (
+              <div class="p-4 md:p-6 grid grid-rows-[auto_auto_1fr_1fr_1fr] gap-y-5 border-b md:border-b-0 border-divider">
+                <!-- Portrait -->
+                <div class="rounded-xl overflow-hidden bg-grey-200 size-16 md:size-20 shrink-0">
+                  <img
+                    src={persona.img}
+                    alt={persona.name}
+                    class="h-full w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+
+                <!-- Name + Role -->
+                <div class="flex flex-col gap-1">
+                  <h4 class="text-[20px] font-medium leading-[1.4] text-ink-2">{persona.name}</h4>
+                  <TextBlock variant="body">{persona.role}</TextBlock>
+                </div>
+
+                <!-- Goal (aligned row across all columns) -->
+                <div class="flex flex-col gap-1.5">
+                  <TextBlock variant="caption">GOAL</TextBlock>
+                  <p class="text-[14px] leading-[1.5] text-ink-2">
+                    {persona.goal}
+                  </p>
+                </div>
+
+                <!-- Challenge (aligned row across all columns) -->
+                <div class="flex flex-col gap-1.5">
+                  <TextBlock variant="caption">CHALLENGE</TextBlock>
+                  <p class="text-[14px] leading-[1.5] text-ink-2">
+                    {persona.challenge}
+                  </p>
+                </div>
+
+                <!-- Design opportunity (aligned row across all columns) -->
+                <div class="flex flex-col gap-1.5">
+                  <TextBlock variant="caption">DESIGN OPPORTUNITY</TextBlock>
+                  <p class="text-[14px] leading-[1.5] text-ink-2">
+                    {persona.opportunity}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    </div>
+
+    <!-- ─────────── CORE USER NEED (full-bleed, no padding, #2D2D39 surface, centered white text) ─────────── -->
+    <FadeIn>
+      <section class="w-full px-0 pb-[72px]">
+        <div class="w-full bg-[#2D2D39] text-white py-10 px-4 md:px-[60px]">
+          <div class="mx-auto w-full max-w-[1280px] flex flex-col items-center text-center gap-3 text-white">
+            <TextBlock variant="section-title" as="h3" class="text-white text-center">Core user need</TextBlock>
+            <TextBlock variant="body-lg" class="text-white text-center max-w-[760px]">
+              A fraud safety companion: Something that speaks their language, tells them if they're safe, and guides them when they're not.
+            </TextBlock>
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    <div class="mx-auto w-full max-w-[1280px]">
+
+    <!-- ─────────── Existing product Audit (3 images + Learnings in one row on desktop) ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-3">
+            <TextBlock variant="section-title" class="md:whitespace-nowrap">Existing product Audit</TextBlock>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 items-start">
+            {auditScreens.map((screen) => (
+              <div class="flex flex-col gap-3 items-center">
+                <div class="w-full overflow-hidden rounded-2xl bg-grey-200 border border-divider">
+                  <img
+                    src={screen.img}
+                    alt={screen.alt}
+                    class="block h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <p class="text-[12px] leading-[1.5] text-[#5a5a5a] text-center">
+                  {screen.caption}
+                </p>
+              </div>
+            ))}
+            <div class="rounded-2xl bg-surface-2 p-6 flex flex-col gap-3">
+              <TextBlock variant="caption">LEARNINGS</TextBlock>
+              <ul class="list-disc pl-5 flex flex-col gap-2 text-[14px] leading-[1.5] text-ink-2">
+                {auditLearnings.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+<!-- ─────────── Competitive Analysis (3 images + Learnings in one row on desktop) ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-3">
+            <TextBlock variant="section-title">Competitive Analysis</TextBlock>
+            <TextBlock variant="body">
+              Studied the competitor App Siren, the key findings were:
+            </TextBlock>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 items-start">
+            {sirenScreens.map((screen) => (
+              <div class="flex flex-col gap-3 items-center">
+                <div class="w-full overflow-hidden rounded-2xl bg-grey-200 border border-divider">
+                  <img
+                    src={screen.img}
+                    alt={screen.alt}
+                    class="block h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <p class="text-[12px] leading-[1.5] text-[#5a5a5a] text-center">
+                  {screen.caption}
+                </p>
+              </div>
+            ))}
+            <div class="rounded-2xl bg-surface-2 p-6 flex flex-col gap-3">
+              <TextBlock variant="caption">LEARNINGS</TextBlock>
+              <ul class="list-disc pl-5 flex flex-col gap-2 text-[14px] leading-[1.5] text-ink-2">
+                {sirenLearnings.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    <!-- ─────────── FTUE (images on next line, sticky Improvements card in 3rd col) ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-3 md:flex-row md:gap-8 md:items-start">
+            <div class="md:w-[280px] md:shrink-0">
+              <TextBlock variant="section-title">FTUE</TextBlock>
+            </div>
+            <div class="md:flex-1" />
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
+            {ftueScreens.map((screen) => (
+              <div class="flex flex-col gap-3 items-center">
+                <div class="w-full overflow-hidden rounded-2xl bg-grey-200 border border-divider">
+                  <img
+                    src={screen.img}
+                    alt={screen.alt}
+                    class="block h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <p class="text-[12px] leading-[1.5] text-[#5a5a5a] text-center">
+                  {screen.caption}
+                </p>
+              </div>
+            ))}
+            <div class="rounded-2xl bg-surface-2 p-6 flex flex-col gap-3 md:sticky md:top-6">
+              <TextBlock variant="caption">IMPROVEMENTS</TextBlock>
+              <ul class="list-disc pl-5 flex flex-col gap-2 text-[14px] leading-[1.5] text-ink-2">
+                {ftueImprovements.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    <!-- ─────────── User with score (images on next line, sticky Improvements card in 3rd col) ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-3">
+            <TextBlock variant="section-title">User with score</TextBlock>
+            <TextBlock variant="body">
+              Goal: Quick overview of their security status and continuous monitoring.
+            </TextBlock>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
+            {scoreScreens.map((screen) => (
+              <div class="flex flex-col gap-3 items-center">
+                <div class="w-full overflow-hidden rounded-2xl bg-grey-200 border border-divider">
+                  <img
+                    src={screen.img}
+                    alt={screen.alt}
+                    class="block h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <p class="text-[12px] leading-[1.5] text-[#5a5a5a] text-center">
+                  {screen.caption}
+                </p>
+              </div>
+            ))}
+            <div class="rounded-2xl bg-surface-2 p-6 flex flex-col gap-3 md:sticky md:top-6">
+              <TextBlock variant="caption">IMPROVEMENTS</TextBlock>
+              <ul class="list-disc pl-5 flex flex-col gap-2 text-[14px] leading-[1.5] text-ink-2">
+                {scoreImprovements.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    <!-- ─────────── Learn experience (images on next row, learning card removed) ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-3">
+            <TextBlock variant="section-title">Learn experience</TextBlock>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 items-start">
+            {learnScreens.map((screen) => (
+              <div class="flex flex-col gap-3 items-center">
+                <div class="w-full overflow-hidden rounded-2xl bg-grey-200 border border-divider">
+                  <img
+                    src={screen.img}
+                    alt={screen.alt}
+                    class="block h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <p class="text-[12px] leading-[1.5] text-[#5a5a5a] text-center">
+                  {screen.caption}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    <!-- ─────────── Explorations (images on next row, learning card & captions removed) ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-3">
+            <TextBlock variant="section-title">Explorations</TextBlock>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 items-start">
+            {explorationScreens.map((screen) => (
+              <div class="w-full overflow-hidden rounded-2xl bg-grey-200 border border-divider">
+                <img
+                  src={screen.img}
+                  alt={screen.alt}
+                  class="block h-auto w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    <!-- ─────────── Conclusion (similar to Overview) ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="flex flex-col gap-3 md:flex-row md:gap-8 md:items-start">
+          <div class="md:w-[280px] md:shrink-0">
+            <TextBlock variant="section-title">Conclusion</TextBlock>
+          </div>
+          <div class="md:flex-1 flex flex-col gap-3">
+            <TextBlock variant="body-lg">
+              My biggest lesson was that understanding what already exists is as important as understanding who you're designing for. By simplifying complex information and prioritizing actionable guidance, the redesign created a more approachable and user-centered product while staying aligned with business and technical constraints.
+            </TextBlock>
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    </div>
+
+    <!-- ─────────── End of project / Thank you (full-bleed, no corner radius) ─────────── -->
+    <FadeIn>
+      <section class="w-full bg-surface-2 flex items-center justify-center gap-6 py-10 px-4 md:px-[60px]">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 0L9.5 6.5L16 8L9.5 9.5L8 16L6.5 9.5L0 8L6.5 6.5L8 0Z" fill="#454545"/>
+        </svg>
+        <TextBlock variant="section-title">Thank you</TextBlock>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 0L9.5 6.5L16 8L9.5 9.5L8 16L6.5 9.5L0 8L6.5 6.5L8 0Z" fill="#454545"/>
+        </svg>
+      </section>
+    </FadeIn>
+  </article>
+
+  <SiteFooter variant="case-study" hideMediumAndDribbble={true} />
+</BaseLayout>
