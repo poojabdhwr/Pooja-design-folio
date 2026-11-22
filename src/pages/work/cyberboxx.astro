@@ -1,9 +1,9 @@
 ---
 /**
- * Case study — Cyberboxx.
- * Content from Case-study-Cyberboxx-desktop-01.pdf through
- * Case-study-Cyberboxx-desktop-04.pdf mapped onto the existing layout,
- * spacing, color, and typography conventions with .png asset names.
+- Case study — Cyberboxx.
+- Content from Case-study-Cyberboxx-desktop-01.pdf through
+- Case-study-Cyberboxx-desktop-04.pdf mapped onto the existing layout,
+- spacing, color, and typography conventions with .png asset names.
  */
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Nav from "../../components/Nav.astro";
@@ -145,8 +145,17 @@ const ftueScreens = [
   },
 ];
 
-const ftueImprovements = [
-  "Leads with a personalized greeting and a single clear action, followed by prevention and learning.",
+const ftueImprovementsTop = [
+  "Personalized greeting with an animated shield symbolizing continuous protection",
+  "One clear primary action to start the security check",
+  "Prioritized additional safety tools for easier access",
+  "Direct WhatsApp support for guidance and assistance",
+  "Simplified complex terminology",
+];
+
+const ftueImprovementsBottom = [
+  "Dedicated Learn section with engaging, easy to explore content formats",
+  "Added a trust indicator to build credibility",
 ];
 
 // — User with score comparison —
@@ -164,8 +173,51 @@ const scoreScreens = [
 ];
 
 const scoreImprovements = [
-  "Grouped educational content into dedicated Learn section for easier discovery.",
-  "Critical actions are surfaced first, so users know exactly what to do next.",
+  "Reversed scoring: Higher scores indicate better safety, matching user expectations",
+  "Simplified complex terminology",
+  "Critical risks are surfaced first",
+  "Added a clear CTA to view detailed breach risks",
+];
+
+// — Risk Report comparison —
+const riskReportScreens = [
+  {
+    img: "/case-studies/cyberboxx/risk-report-current.png",
+    alt: "Current Risk Report screen",
+    caption: "Current",
+  },
+  {
+    img: "/case-studies/cyberboxx/risk-report-proposed.png",
+    alt: "Proposed Risk Report screen",
+    caption: "Proposed",
+  },
+];
+
+const riskReportImprovements = [
+  "Simplified profile card with quick account switching and member addition",
+  "Combined scattered information, prioritizing critical risks for quick attention",
+  "Replaced lengthy explanations with clear, scannable risk summaries and recommendations for each risk",
+];
+
+// — Identity Monitoring comparison —
+const identityMonitoringScreens = [
+  {
+    img: "/case-studies/cyberboxx/identity-monitoring-current.png",
+    alt: "Current Identity Monitoring screen",
+    caption: "Current",
+  },
+  {
+    img: "/case-studies/cyberboxx/identity-monitoring-proposed.png",
+    alt: "Proposed Identity Monitoring screen",
+    caption: "Proposed",
+  },
+];
+
+const identityMonitoringImprovements = [
+  "Prioritized actionable threats first, followed by older breach records",
+  "Clearly highlighted severity levels for quick risk identification",
+  "Simplified each card to show exposed data and recommended actions",
+  'Added "More details" for users seeking further information',
 ];
 
 // — Learn experience individual screens —
@@ -174,7 +226,7 @@ const learnScreens = [
     img: "/case-studies/cyberboxx/learn-otp-scam.png",
     alt: "OTP scam screen",
     caption: "OTP scam",
-  },  
+  },
   {
     img: "/case-studies/cyberboxx/learn-fake-arrest.png",
     alt: "Fake arrest scam screen",
@@ -274,7 +326,7 @@ const learnExplorations = [
 ---
 
 <BaseLayout
-  title="Cyberboxx: Designing Online Safety for Indian Users — Damodar Badhwar"
+  title="Cyberboxx: Designing Online Safety for Indian Users — Pooja Badhwar"
   description="Adapting and redesigning Cyberboxx for Indian users across Web and Android."
 >
   <!-- Top container: 24px above nav, then nav, then 56px gap before title -->
@@ -377,7 +429,12 @@ const learnExplorations = [
           </div>
           <div class="md:flex-1">
             <TextBlock variant="body">
-              Cyberboxx is an established cybersecurity product in Canadian market and was looking to expand its reach to India. The goal was to adapt and redesign the existing product to make it more suitable and accessible for Indian users, considering their different needs, backgrounds, and levels of digital literacy.
+              <a
+                href="https://boxxinsurance.com/us/en/products/cyberboxx-home/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-inherit underline underline-offset-2 transition-opacity hover:opacity-75"
+              >Cyberboxx</a> is an established cybersecurity product in the Canadian market and was looking to expand its reach to India. The goal was to adapt and redesign the existing product to make it more suitable and accessible for Indian users, considering their different needs, backgrounds, and levels of digital literacy.
             </TextBlock>
           </div>
         </div>
@@ -497,15 +554,12 @@ const learnExplorations = [
       </section>
     </FadeIn>
 
-<!-- ─────────── Competitive Analysis (3 images + Learnings in one row on desktop) ─────────── -->
+    <!-- ─────────── Competitive Analysis (3 images + Learnings in one row on desktop) ─────────── -->
     <FadeIn>
       <section class="px-4 pb-[72px] md:px-[60px]">
         <div class="flex flex-col gap-6">
           <div class="flex flex-col gap-3">
             <TextBlock variant="section-title">Competitive Analysis</TextBlock>
-            <TextBlock variant="body">
-              Studied the competitor App Siren, the key findings were:
-            </TextBlock>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 items-start">
             {sirenScreens.map((screen) => (
@@ -536,7 +590,7 @@ const learnExplorations = [
       </section>
     </FadeIn>
 
-    <!-- ─────────── FTUE (images on next line, sticky Improvements card in 3rd col) ─────────── -->
+    <!-- ─────────── FTUE (Current vs Proposed + sticky Improvements cards in 3rd col) ─────────── -->
     <FadeIn>
       <section class="px-4 pb-[72px] md:px-[60px]">
         <div class="flex flex-col gap-6">
@@ -549,6 +603,9 @@ const learnExplorations = [
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
             {ftueScreens.map((screen) => (
               <div class="flex flex-col gap-3 items-center">
+                <p class="text-[12px] leading-[1.5] text-[#5a5a5a] text-center">
+                  {screen.caption}
+                </p>
                 <div class="w-full overflow-hidden rounded-2xl bg-grey-200 border border-divider">
                   <img
                     src={screen.img}
@@ -557,25 +614,32 @@ const learnExplorations = [
                     loading="lazy"
                   />
                 </div>
-                <p class="text-[12px] leading-[1.5] text-[#5a5a5a] text-center">
-                  {screen.caption}
-                </p>
               </div>
             ))}
-            <div class="rounded-2xl bg-surface-2 p-6 flex flex-col gap-3 md:sticky md:top-6">
-              <TextBlock variant="caption">IMPROVEMENTS</TextBlock>
-              <ul class="list-disc pl-5 flex flex-col gap-2 text-[14px] leading-[1.5] text-ink-2">
-                {ftueImprovements.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
+            <div class="flex flex-col gap-6 md:sticky md:top-6 md:pt-[30px]">
+              <div class="rounded-2xl bg-surface-2 p-6 flex flex-col gap-3">
+                <TextBlock variant="caption">IMPROVEMENTS</TextBlock>
+                <ul class="list-disc pl-5 flex flex-col gap-2 text-[14px] leading-[1.5] text-ink-2">
+                  {ftueImprovementsTop.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+              <div class="rounded-2xl bg-surface-2 p-6 flex flex-col gap-3">
+                <TextBlock variant="caption">IMPROVEMENTS</TextBlock>
+                <ul class="list-disc pl-5 flex flex-col gap-2 text-[14px] leading-[1.5] text-ink-2">
+                  {ftueImprovementsBottom.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </section>
     </FadeIn>
 
-    <!-- ─────────── User with score (images on next line, sticky Improvements card in 3rd col) ─────────── -->
+    <!-- ─────────── User with score (Current vs Proposed + sticky Improvements card in 3rd col) ─────────── -->
     <FadeIn>
       <section class="px-4 pb-[72px] md:px-[60px]">
         <div class="flex flex-col gap-6">
@@ -588,6 +652,9 @@ const learnExplorations = [
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
             {scoreScreens.map((screen) => (
               <div class="flex flex-col gap-3 items-center">
+                <p class="text-[12px] leading-[1.5] text-[#5a5a5a] text-center">
+                  {screen.caption}
+                </p>
                 <div class="w-full overflow-hidden rounded-2xl bg-grey-200 border border-divider">
                   <img
                     src={screen.img}
@@ -596,15 +663,84 @@ const learnExplorations = [
                     loading="lazy"
                   />
                 </div>
-                <p class="text-[12px] leading-[1.5] text-[#5a5a5a] text-center">
-                  {screen.caption}
-                </p>
               </div>
             ))}
-            <div class="rounded-2xl bg-surface-2 p-6 flex flex-col gap-3 md:sticky md:top-6">
+            <div class="rounded-2xl bg-surface-2 p-6 flex flex-col gap-3 md:sticky md:top-6 md:mt-[30px]">
               <TextBlock variant="caption">IMPROVEMENTS</TextBlock>
               <ul class="list-disc pl-5 flex flex-col gap-2 text-[14px] leading-[1.5] text-ink-2">
                 {scoreImprovements.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    <!-- ─────────── Risk Report (Current vs Proposed + sticky Improvements card in 3rd col) ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-3">
+            <TextBlock variant="section-title">Risk Report</TextBlock>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
+            {riskReportScreens.map((screen) => (
+              <div class="flex flex-col gap-3 items-center">
+                <p class="text-[12px] leading-[1.5] text-[#5a5a5a] text-center">
+                  {screen.caption}
+                </p>
+                <div class="w-full overflow-hidden rounded-2xl bg-grey-200 border border-divider">
+                  <img
+                    src={screen.img}
+                    alt={screen.alt}
+                    class="block h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            ))}
+            <div class="rounded-2xl bg-surface-2 p-6 flex flex-col gap-3 md:sticky md:top-6 md:mt-[30px]">
+              <TextBlock variant="caption">IMPROVEMENTS</TextBlock>
+              <ul class="list-disc pl-5 flex flex-col gap-2 text-[14px] leading-[1.5] text-ink-2">
+                {riskReportImprovements.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </FadeIn>
+
+    <!-- ─────────── Identity Monitoring (Current vs Proposed + sticky Improvements card in 3rd col) ─────────── -->
+    <FadeIn>
+      <section class="px-4 pb-[72px] md:px-[60px]">
+        <div class="flex flex-col gap-6">
+          <div class="flex flex-col gap-3">
+            <TextBlock variant="section-title">Identity Monitoring</TextBlock>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-start">
+            {identityMonitoringScreens.map((screen) => (
+              <div class="flex flex-col gap-3 items-center">
+                <p class="text-[12px] leading-[1.5] text-[#5a5a5a] text-center">
+                  {screen.caption}
+                </p>
+                <div class="w-full overflow-hidden rounded-2xl bg-grey-200 border border-divider">
+                  <img
+                    src={screen.img}
+                    alt={screen.alt}
+                    class="block h-auto w-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            ))}
+            <div class="rounded-2xl bg-surface-2 p-6 flex flex-col gap-3 md:sticky md:top-6 md:mt-[30px]">
+              <TextBlock variant="caption">IMPROVEMENTS</TextBlock>
+              <ul class="list-disc pl-5 flex flex-col gap-2 text-[14px] leading-[1.5] text-ink-2">
+                {identityMonitoringImprovements.map((item) => (
                   <li>{item}</li>
                 ))}
               </ul>
@@ -674,7 +810,7 @@ const learnExplorations = [
           </div>
           <div class="md:flex-1 flex flex-col gap-3">
             <TextBlock variant="body-lg">
-              My biggest lesson was that understanding what already exists is as important as understanding who you're designing for. By simplifying complex information and prioritizing actionable guidance, the redesign created a more approachable and user-centered product while staying aligned with business and technical constraints.
+              This project taught me that showing users what's wrong isn't enough; they also need to know what to do next. I learned to turn complex security information into clear priorities and practical actions, while balancing user needs with business and technical constraints.
             </TextBlock>
           </div>
         </div>
